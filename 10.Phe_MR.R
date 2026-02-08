@@ -1,12 +1,24 @@
+# ==============================================================================
+# 脚本名称: 10.Phe_MR.R
+# 功能描述: 系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点 - 全表型MR分析
+# 作者信息: Hongqi Wang
+# 联系邮箱: hqwangccmu@163.com
+# 创建日期: 2026-02-08
+# ==============================================================================
+
+# ==============================================================================
+# 1. 环境设置与依赖加载
+# ==============================================================================
+
 ### 导入函数
-RCodes <- list.files(path = "/Pub/Users/liulk/RCodes/RCodes_CY/", pattern = "\\.R$", recursive = T, full.names = T)
+RCodes <- list.files(path = "/Pub/Users/RCodes/", pattern = "\\.R$", recursive = T, full.names = T)
 for (i in 1:length(RCodes)) {
     source(RCodes[i])
 }
 
 ### 设置工作目录
-setwd("/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
-out_home <- "/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
+setwd("/Pub/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
+out_home <- "/Pub/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
 
 ### 设置输出目录
 out_dir <- paste0(out_home,"/10.Phe_MR/")
@@ -47,7 +59,7 @@ Phe_MR_res <- map_df(phenotypes$ID, function(x) {
         filter(ID == x) %>%
         pull(phenostring)
     ## 读入结局数据，并提取结局数据中也存在的SNP
-    outcome_data <- readRDS(paste0("/Pub/Users/yanhx/database/Pheweb/cleandata/", x, "/", "data.RDS")) %>%
+    outcome_data <- readRDS(paste0("/Pub/Users/database/Pheweb/cleandata/", x, "/", "data.RDS")) %>%
         mutate(outcome = outcome, id.outcome = outcome) %>%
         filter(SNP %in% exposure_dat$SNP) %>%
         dplyr::select(
