@@ -1,12 +1,13 @@
+### former ananlysis with known stroke-related biomarkers published in the articles and open gwas data from ieu-gwas
 ### 导入函数
-RCodes <- list.files(path = "/Pub/Users/liulk/RCodes/RCodes_CY/", pattern = "\\.R$", recursive = T, full.names = T)
+RCodes <- list.files(path = "/Pub/Users/RCodes/", pattern = "\\.R$", recursive = T, full.names = T)
 for (i in 1:length(RCodes)) {
     source(RCodes[i])
 }
 
 ### 设置工作目录
-setwd("/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
-out_home <- "/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
+setwd("/Pub/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
+out_home <- "/Pub/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
 
 ### 设置输出目录
 out_dir <- paste0(out_home,"/9.BioMarker/")
