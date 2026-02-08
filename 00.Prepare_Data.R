@@ -3,11 +3,11 @@ RCodes <- list.files(path = "/Pub/Users/liulk/RCodes/RCodes_CY/", pattern = "\\.
 for (i in 1:length(RCodes)) {
     source(RCodes[i])
 }
-source("/Pub/Users/liulk/RCodes/RCodes_LLK/make_gene_average.r")
+source("/RCodes/make_gene_average.r")
 
 ### 设置工作目录
-setwd("/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/rawdata/")
-out_home <- "/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
+setwd("/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/rawdata/")
+out_home <- "/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
 
 ### 设置输出目录
 out_dir <- paste0(out_home,"/0.Prepare_Data/")
