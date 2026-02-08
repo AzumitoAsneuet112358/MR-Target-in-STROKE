@@ -1,12 +1,12 @@
 ### 导入函数
-RCodes <- list.files(path = "/Pub/Users/liulk/RCodes/RCodes_CY/", pattern = "\\.R$", recursive = T, full.names = T)
+RCodes <- list.files(path = "/RCodes/", pattern = "\\.R$", recursive = T, full.names = T)
 for (i in 1:length(RCodes)) {
     source(RCodes[i])
 }
 
 ### 设置工作目录
-setwd("/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
-out_home <- "/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
+setwd("/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
+out_home <- "/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
 
 ### 设置输出目录
 out_dir <- paste0(out_home,"/1.PsychENCODE_res/")
@@ -35,8 +35,8 @@ PsychENCODE_eqtl_clump <- map_df(unique(PsychENCODE_eqtl$exposure), function(x) 
     mutate(rsid = SNP, pval = pval.exposure) %>%
     ld_clump(
       dat = ., clump_r2 = 0.01, clump_kb = 10000, pop = "EUR",
-      plink_bin = "/Pub/Users/liulk/R/x86_64-pc-linux-gnu-library/4.1/plinkbinr/bin/plink_Linux",
-      bfile = "/Pub/Users/cuiye/database/IEU/EUR_ref/EUR"
+      plink_bin = "/Pub/Users/R/x86_64-pc-linux-gnu-library/4.1/plinkbinr/bin/plink_Linux",
+      bfile = "/Pub/Users/database/IEU/EUR_ref/EUR"
     ) 
 })%>%
     dplyr::select(-c(rsid, pval, id))
