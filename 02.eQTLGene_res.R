@@ -1,12 +1,12 @@
 ### 导入函数
-RCodes <- list.files(path = "/Pub/Users/liulk/RCodes/RCodes_CY/", pattern = "\\.R$", recursive = T, full.names = T)
+RCodes <- list.files(path = "/Pub/Users/RCodes/", pattern = "\\.R$", recursive = T, full.names = T)
 for (i in 1:length(RCodes)) {
     source(RCodes[i])
 }
 
 ### 设置工作目录
-setwd("/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
-out_home <- "/Pub/Users/liulk/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
+setwd("/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/0.Prepare_Data/")
+out_home <- "/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点/"
 
 ### 设置输出目录
 out_dir <- paste0(out_home,"/2.eQTLGene_res/")
@@ -35,8 +35,8 @@ eQTLGene_eqtl_clump <- map_df(unique(eQTLGene_eqtl$exposure), function(x) {
     mutate(rsid = SNP, pval = pval.exposure) %>%
     ld_clump(
       dat = ., clump_r2 = 0.01, clump_kb = 10000, pop = "EUR",
-      plink_bin = "/Pub/Users/liulk/R/x86_64-pc-linux-gnu-library/4.1/plinkbinr/bin/plink_Linux",
-      bfile = "/Pub/Users/cuiye/database/IEU/EUR_ref/EUR"
+      plink_bin = "/Pub/Users/R/x86_64-pc-linux-gnu-library/4.1/plinkbinr/bin/plink_Linux",
+      bfile = "/Pub/Users/database/IEU/EUR_ref/EUR"
     ) 
 })%>%
     dplyr::select(-c(rsid, pval, id))
@@ -149,57 +149,4 @@ dev.off()
 
 ### 清除环境变量
 rm(list = ls())
-
-
-
-
-# ### 循环分析阳性的基因
-# walk(positive_gene, function(x) {
-#     # 创建结果输出路径
-#     od <- paste0(out_dir, "/", x)
-#     mkdir(od)
-#     # 准备某基因的暴露因素
-#     exposure_dat <- eQTLGene_eqtl_clump %>% filter(exposure == x) %>% distinct(SNP,.keep_all = T)
-#     write.csv(exposure_dat, file = paste0(od, "/", "exposure_dat.csv"), row.names = F)
-#     # 暴露因素对应的结局数据
-#     outcome_dat <- outcome_data %>% filter(SNP %in% exposure_dat$SNP)
-#     write.csv(outcome_dat, file = paste0(od, "/", "outcome_dat.csv"), row.names = F)
-#     # 一致性分析
-#     data <- harmonise_data(exposure_dat = exposure_dat, outcome_dat = outcome_dat) %>% filter(mr_keep == "TRUE")
-#     write.csv(data, file = paste0(od, "/", "data.csv"), row.names = F)
-#     # 水平多效性分析
-#     egger_pleiotropy_pavlue <- mr_pleiotropy_test(data) %>%
-#         dplyr::select(egger_pval = pval) %>%
-#         as.numeric()
-#     # 异质性检测
-#     heterogeneity_test_pavlue <- (mr_heterogeneity(data) %>% dplyr::select(Q_pval))[2, ] %>% as.numeric()
-#     # MR 分析
-#     MR_res <- mr(data) %>%
-#         generate_odds_ratios() %>%
-#         mutate(egger_pleiotropy_pavlue = egger_pleiotropy_pavlue, heterogeneity_test_pavlue = heterogeneity_test_pavlue)
-#     write.csv(MR_res, file = paste0(od, "/", "MR_res.csv"), row.names = F)
-#     # 作图展示 MR 分析结果
-#     pdf <- mr_scatter_plot(MR_res, data)
-#     pdf(paste0(od, "/mr_scatter_plot.pdf"), w = 5, h = 5)
-#     print(pdf[[1]])
-#     dev.off()
-#     # 森林图
-#     res_single <- mr_singlesnp(data)
-#     pdf <- mr_forest_plot(res_single)
-#     pdf(paste0(od, "/mr_forest_plot.pdf"), w = 4.5, h = 5)
-#     print(pdf[[1]])
-#     dev.off()
-#     ### 漏斗图
-#     pdf <- mr_funnel_plot(res_single)
-#     pdf(paste0(od, "/mr_funnel_plot.pdf"), w = 5, h = 5)
-#     print(pdf[[1]])
-#     dev.off()
-#     ###  逐个剔除检验
-#     single <- mr_leaveoneout(data)
-#     pdf <- mr_leaveoneout_plot(single)
-#     pdf(paste0(od, "/Leave-one-out.pdf"), w = 4.5, h = 5)
-#     print(pdf[[1]])
-#     dev.off()
-# })
-
 
