@@ -1,0 +1,60 @@
+---
+title: "Genetically Identified Therapeutic Anti-Stroke Drug Targets and Repurposing Drugs: Insights from Genome-wide Mendelian Randomization to Multi-level Model Validation"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Scripts and source data used to produce figures, alongside scripts used in data analysis for **MR-Target on STROKE**.
+
+The whole script were used to perform statistical analysis and generate figures in the study **"Genetically Identified Therapeutic Anti-Stroke Drug Targets and Repurposing Drugs: Insights from Genome-wide Mendelian Randomization to Multi-level Model Validation"**.
+
+This project employs a comprehensive analytical framework combining Genome-wide Mendelian Randomization (MR) with multi-level model validation to identify and validate potential therapeutic targets for stroke and its subtypes.
+
+# Analysis Pipeline
+
+The analysis pipeline is organized into several key modules, covering data preparation, primary MR analysis, tissue-specific analysis, and multi-level validation.
+
+## 1. Data Preparation
+- **`0.Prepare_Data.r`**: Initial data processing and preparation steps.
+- **`0.check_data/`**: Scripts for verifying data structure and integrity.
+
+## 2. Primary Mendelian Randomization (MR) Analysis
+- **`1-四个暴漏和结局outcomeMR分析检验全.R`**: The core MR analysis script, assessing the causal effects of four key exposures on stroke outcomes.
+- **`11.Ischemic_Stroke.r`**: Specific MR analysis focusing on Ischemic Stroke.
+- **`17.ICH+SAH_MR.R`**: Specific MR analysis for Intracerebral Hemorrhage (ICH) and Subarachnoid Hemorrhage (SAH) outcomes using FinnGen data.
+
+## 3. Tissue-Specific & QTL Analysis
+Scripts for analyzing quantitative trait loci (QTLs) across different tissues to understand the mechanism of action.
+- **`1.PsychENCODE_res.r`**: Analysis using PsychENCODE data.
+- **`2.eQTLGene_res.r`**: Analysis using eQTLGen data.
+- **`3.GTEx_Brain_res.r`**: Analysis using GTEx Brain tissue data.
+- **`4.GTEx_Blood_res.r`**: Analysis using GTEx Blood tissue data.
+
+## 4. Validation & Sensitivity Analysis
+To ensure the robustness of the findings, several validation methods are applied:
+- **`13.MR_Steiger_stroke+ischemic_stroke.R`**: Steiger directionality test to verify the direction of causality.
+- **`14.reverse_MR_stroke+ischemic_stroke.R`**: Reverse MR analysis to check for reverse causation.
+- **`15.SMR/`**: Summary-data-based Mendelian Randomization (SMR) analysis.
+- **`8.Colocalization.r`** & **`8.COLOC/`**: Colocalization analysis to determine if the GWAS signals for exposure and outcome share the same causal variant.
+
+## 5. Additional Analyses
+- **`9.BioMarker.r`**: Analysis of relevant biomarkers.
+- **`10.Phe_MR.r`**: Phenome-wide Mendelian Randomization (Phe-MR) analysis.
+- **`12.Bulk_RNA.r`**: Bulk RNA-seq data analysis.
+- **`16.MAGE_MR.R`**: Multivariate or interaction-based MR analysis (MAGE) using multi-ancestry eQTL data.
+
+## 6. Result Summarization
+- **`5.Summary_Tissue.r`**
+- **`6.Summary_Blood.r`**
+- **`7.Summary_ALL.r`**
+
+# Contact Information
+
+If any questions, please contact at:
+- **xiazhangccmu@163.com**
+- **hqwangccmu@163.com**
