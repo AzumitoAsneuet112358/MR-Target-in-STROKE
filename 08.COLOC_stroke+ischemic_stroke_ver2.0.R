@@ -13,7 +13,7 @@
 message("\n[Step 1] 初始化环境与加载依赖包...")
 
 # 设置工作目录
-work_dir <- "C:/Users/50301/Desktop/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点"
+work_dir <- "/Pub/Project/系统性药物全基因组孟德尔随机化确定脑卒中的治疗靶点"
 if (dir.exists(work_dir)) {
     setwd(work_dir)
     message("工作目录已设置为: ", work_dir)
@@ -406,3 +406,4 @@ if (length(final_results_list) > 0) {
 message("\n==============================================================================")
 message("   脚本运行结束 (End of Script)")
 message("==============================================================================")
+
